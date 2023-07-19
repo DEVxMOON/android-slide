@@ -49,10 +49,10 @@
         android:id="@+id/btn_background"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="5dp"
-        android:text=""
+        android:layout_marginEnd="16dp"
         android:background="@drawable/button"
+        android:text=""
         app:layout_constraintEnd_toEndOf="@id/v_attribute"
         app:layout_constraintStart_toStartOf="@id/txt_background"
         app:layout_constraintTop_toBottomOf="@id/txt_background" />
@@ -74,15 +74,14 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        android:text=""
-        android:textSize="25sp"
         android:background="@drawable/button"
         android:backgroundTint="@color/white"
-        android:textAlignment="textEnd"
         android:padding="5dp"
+        android:text=""
+        android:textAlignment="textEnd"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/v_attribute"
-        app:layout_constraintTop_toBottomOf="@id/txt_alpha"
- />
+        app:layout_constraintTop_toBottomOf="@id/txt_alpha" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_alpha_minus"
@@ -91,8 +90,8 @@
         android:layout_marginStart="5dp"
         android:background="@drawable/button"
         android:text="@string/minus"
-        android:textSize="25sp"
         android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@id/v_alpha"
         app:layout_constraintEnd_toStartOf="@id/btn_alpha_plus"
         app:layout_constraintStart_toEndOf="@id/v_alpha"
@@ -106,21 +105,11 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button"
         android:text="@string/plus"
-        android:textSize="25sp"
         android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@id/btn_alpha_minus"
         app:layout_constraintEnd_toEndOf="@id/v_attribute"
         app:layout_constraintStart_toEndOf="@id/btn_alpha_minus"
         app:layout_constraintTop_toTopOf="@id/btn_alpha_minus" />
-
-    <View
-        android:id="@+id/square"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:background="#ffcf0f"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

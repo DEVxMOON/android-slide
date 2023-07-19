@@ -1,25 +1,82 @@
 package com.hr.slide_app
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.hr.slide_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: SlideViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val slideFactory = SquareSlideFactory()
+        viewModel.generateSlide()
 
-        val rect1 = slideFactory.create(216,RGB(245,0,245),9)
-        val rect2 = slideFactory.create(384,RGB(43,124,95),5)
-        val rect3 = slideFactory.create(108,RGB(98,244,15),7)
-        val rect4 = slideFactory.create(233,RGB(125,39,99),1)
+        val viewMap = mutableMapOf<String, ImageView>()
 
-        Log.d("Square", "Rect1 $rect1")
-        Log.d("Square", "Rect2 $rect2")
-        Log.d("Square", "Rect3 $rect3")
-        Log.d("Square", "Rect4 $rect4")
+        viewModel.slides.observe(this) {
+            viewMap[it.uniqueID] = createView(it)
+        }
 
+        viewModel.selectedSlide.observe(this)
+        {
+            if (it.second == null) {
+                viewMap[it.first?.uniqueID]?.setImageResource(0)
+
+            } else {
+                viewMap[it.second!!.uniqueID]?.setImageResource(R.drawable.border)
+                viewMap[it.second!!.uniqueID]?.setBackgroundColor(Color.parseColor(it.second!!.rgb.toString()))
+                viewMap[it.second!!.uniqueID]?.alpha = it.second!!.alpha.value
+                //색상 변동 setBackground
+                //알파 변동 alpha
+
+                binding.btnBackground?.setBackgroundColor(Color.parseColor(it.second!!.rgb.toString()))
+                binding.btnBackground?.text = it.second!!.rgb.toString()
+                binding.vAlpha?.text = it.second!!.alpha.toString()
+            }
+        }
+
+        binding.vSlideView?.setOnClickListener {
+            viewModel.selectedSlide(null)
+        }
+
+
+        binding.btnBackground?.setOnClickListener {
+            viewModel.changeSlideColor()
+        }
+
+        binding.btnAlphaMinus?.setOnClickListener {
+            viewModel.changeSlideAlpha(Alpha.ALPHA_DOWN)
+        }
+
+        binding.btnAlphaPlus?.setOnClickListener {
+            viewModel.changeSlideAlpha(Alpha.ALPHA_UP)
+        }
+    }
+
+    private fun createView(slide: Slide): ImageView {
+        Log.d("height", slide.toString())
+        val iv = ImageView(this)
+        iv.setBackgroundColor(R.drawable.button)
+        val lp = ConstraintLayout.LayoutParams(slide.width, slide.height).apply {
+            startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+            endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+            topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+            bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
+        }
+        iv.layoutParams = lp
+
+        iv.setOnClickListener {
+            viewModel.selectedSlide(slide)
+        }
+        binding.root.addView(iv)
+        return iv
     }
 }
