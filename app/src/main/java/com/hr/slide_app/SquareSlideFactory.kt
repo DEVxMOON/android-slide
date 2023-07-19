@@ -2,8 +2,7 @@ package com.hr.slide_app
 
 class SquareSlideFactory: SlideFactory(){
 
-    override fun create(side:Int, rgb: RGB, alpha:Int): Slide {
-        //return Square(generateRandomId(),generateRandomSideLength(), generateRandomColor(), generateRandomAlpha())
+    override fun create(side:Int, rgb: RGB, alpha:Alpha): Slide {
         return Square(generateRandomId(),side,rgb,alpha)
     }
 }

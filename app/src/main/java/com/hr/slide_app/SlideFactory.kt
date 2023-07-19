@@ -5,7 +5,7 @@ import kotlin.random.Random
 abstract class SlideFactory {
     private val uniqueIdList = mutableSetOf<String>()
 
-    abstract fun create(side:Int, rgb:RGB, alpha:Int): Slide
+    abstract fun create(side:Int, rgb:RGB, alpha:Alpha): Slide
 
     fun generateRandomId(): String {
 
@@ -28,21 +28,4 @@ abstract class SlideFactory {
     private fun checkDuplicate(uniqueId: String): Boolean {
         return uniqueIdList.contains(uniqueId).also { uniqueIdList.add(uniqueId) }
     }
-
-    fun generateRandomSideLength(): Int {
-        return Random.nextInt(100, 301)
-    }
-
-    fun generateRandomColor(): RGB {
-        return RGB(
-            Random.nextInt(256),
-            Random.nextInt(256),
-            Random.nextInt(256)
-        )
-    }
-
-    fun generateRandomAlpha(): Int {
-        return Random.nextInt(1, 11)
-    }
-
 }
