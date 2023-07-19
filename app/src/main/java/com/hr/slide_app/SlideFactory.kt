@@ -26,6 +26,6 @@ abstract class SlideFactory {
     }
 
     private fun checkDuplicate(uniqueId: String): Boolean {
-        return uniqueIdList.contains(uniqueId).also { uniqueIdList.add(uniqueId) }
+        return uniqueIdList.contains(uniqueId).also { if(it){uniqueIdList.add(uniqueId)} }
     }
 }
