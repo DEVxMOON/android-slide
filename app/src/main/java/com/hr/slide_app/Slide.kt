@@ -24,6 +24,4 @@ open class Slide(
         alpha = Alpha.values()[alpha.level + type - 1]
         return true
     }
-
-
 }
