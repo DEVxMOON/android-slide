@@ -1,8 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#5f5f5f">
+
+    <View
+        android:id="@+id/v_layer"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="#dfdfdf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/v_slideView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1.33:1"
+        app:layout_constraintEnd_toStartOf="@id/v_attribute"
+        app:layout_constraintStart_toEndOf="@id/v_layer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/v_attribute"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:background="#dfdfdf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_background"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/v_attribute"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_background"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@id/v_attribute"
+        app:layout_constraintStart_toStartOf="@id/txt_background"
+        app:layout_constraintTop_toBottomOf="@id/txt_background" />
+
+    <TextView
+        android:id="@+id/txt_alpha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txt_alpha"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/v_attribute"
+        app:layout_constraintTop_toBottomOf="@id/btn_background" />
+
+    <TextView
+        android:id="@+id/v_alpha"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/white"
+        android:padding="5dp"
+        android:text=""
+        android:textAlignment="textEnd"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/v_attribute"
+        app:layout_constraintTop_toBottomOf="@id/txt_alpha" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_alpha_minus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/button"
+        android:text="@string/minus"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@id/v_alpha"
+        app:layout_constraintEnd_toStartOf="@id/btn_alpha_plus"
+        app:layout_constraintStart_toEndOf="@id/v_alpha"
+        app:layout_constraintTop_toTopOf="@id/v_alpha" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_alpha_plus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button"
+        android:text="@string/plus"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_alpha_minus"
+        app:layout_constraintEnd_toEndOf="@id/v_attribute"
+        app:layout_constraintStart_toEndOf="@id/btn_alpha_minus"
+        app:layout_constraintTop_toTopOf="@id/btn_alpha_minus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
