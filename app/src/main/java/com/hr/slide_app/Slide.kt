@@ -1,9 +1,9 @@
 package com.hr.slide_app
 
 open class Slide(
-    var uniqueID: String,
-    var width: Int,
-    var height: Int,
+    val uniqueID: String,
+    val width: Int,
+    val height: Int,
     var rgb: RGB,
     var alpha: Alpha
 ) {
@@ -24,6 +24,4 @@ open class Slide(
         alpha = Alpha.values()[alpha.level + type - 1]
         return true
     }
-
-
 }

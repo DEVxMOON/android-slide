@@ -6,14 +6,12 @@ import androidx.lifecycle.ViewModel
 
 class SlideViewModel : ViewModel() {
 
-    //MutableLiveData : 값의 get, set 모두 가능
-    //LiveData : 값의 get 만 가능 --> 항상 UI로 처리
-    private var slideManager = SlideManager()
+    private val slideManager = SlideManager()
 
-    private var _slides = MutableLiveData<Slide>()
+    private val _slides = MutableLiveData<Slide>()
     val slides: LiveData<Slide> = _slides
 
-    private var _selectedSlide = MutableLiveData<Pair<Slide?, Slide?>>()
+    private val _selectedSlide = MutableLiveData<Pair<Slide?, Slide?>>()
     val selectedSlide: LiveData<Pair<Slide?, Slide?>> = _selectedSlide
 
 

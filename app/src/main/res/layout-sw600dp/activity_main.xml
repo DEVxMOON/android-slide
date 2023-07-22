@@ -41,6 +41,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/txt_background"
+        android:textStyle="bold"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/v_attribute"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +65,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/txt_alpha"
+        android:textStyle="bold"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/v_attribute"
         app:layout_constraintTop_toBottomOf="@id/btn_background" />
