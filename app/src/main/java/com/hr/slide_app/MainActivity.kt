@@ -3,26 +3,57 @@ package com.hr.slide_app
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hr.slide_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+
     private val viewModel: SlideViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.generateSlide()
-
         val viewMap = mutableMapOf<String, ImageView>()
 
-        viewModel.slides.observe(this) {
+        val layerViewAdapter = LayerViewAdapter().apply {
+            setLayerClickEvent { slide: Slide ->
+                viewModel.changeDisplayedSlide(slide)
+            }
+        }
+
+        val slideItemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(object :
+            ItemTouchHelperCallback.ItemTouchHelperListener {
+            override fun onItemMove(from: Int, to: Int) {
+                viewModel.changeSlideOrder(from, to)
+            }
+        }))
+
+        /** binding */
+        binding.vRecycler?.apply {
+            adapter = layerViewAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            slideItemTouchHelper.attachToRecyclerView(this)
+        }
+
+        binding.btnLayerPlus?.setOnClickListener { viewModel.generateSlide() }
+        binding.vSlideView?.setOnClickListener { viewModel.selectedSlide(null) }
+        binding.btnBackground?.setOnClickListener { viewModel.changeSlideColor() }
+        binding.btnAlphaMinus?.setOnClickListener { viewModel.changeSlideAlpha(Alpha.ALPHA_DOWN) }
+        binding.btnAlphaPlus?.setOnClickListener { viewModel.changeSlideAlpha(Alpha.ALPHA_UP) }
+
+        /** observing */
+        viewModel.slides.observe(this)
+        {
+            layerViewAdapter.addSlide(it)
             viewMap[it.uniqueID] = createView(it)
+
         }
 
         viewModel.selectedSlide.observe(this)
@@ -34,8 +65,6 @@ class MainActivity : AppCompatActivity() {
                 viewMap[it.second!!.uniqueID]?.setImageResource(R.drawable.border)
                 viewMap[it.second!!.uniqueID]?.setBackgroundColor(Color.parseColor(it.second!!.rgb.toString()))
                 viewMap[it.second!!.uniqueID]?.alpha = it.second!!.alpha.value
-                //색상 변동 setBackground
-                //알파 변동 alpha
 
                 binding.btnBackground?.setBackgroundColor(Color.parseColor(it.second!!.rgb.toString()))
                 binding.btnBackground?.text = it.second!!.rgb.toString()
@@ -43,28 +72,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.vSlideView?.setOnClickListener {
-            viewModel.selectedSlide(null)
-        }
-
-
-        binding.btnBackground?.setOnClickListener {
-            viewModel.changeSlideColor()
-        }
-
-        binding.btnAlphaMinus?.setOnClickListener {
-            viewModel.changeSlideAlpha(Alpha.ALPHA_DOWN)
-        }
-
-        binding.btnAlphaPlus?.setOnClickListener {
-            viewModel.changeSlideAlpha(Alpha.ALPHA_UP)
+        viewModel.slideOrderChange.observe(this)
+        {
+            layerViewAdapter.changeSlideOrder(it.first, it.second)
         }
     }
 
     private fun createView(slide: Slide): ImageView {
-        Log.d("height", slide.toString())
         val iv = ImageView(this)
-        iv.setBackgroundColor(R.drawable.button)
+        iv.setBackgroundColor(Color.RED)
         val lp = ConstraintLayout.LayoutParams(slide.width, slide.height).apply {
             startToStart = ConstraintLayout.LayoutParams.PARENT_ID
             endToEnd = ConstraintLayout.LayoutParams.PARENT_ID

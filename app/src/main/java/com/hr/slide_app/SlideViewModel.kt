@@ -14,9 +14,10 @@ class SlideViewModel : ViewModel() {
     private val _selectedSlide = MutableLiveData<Pair<Slide?, Slide?>>()
     val selectedSlide: LiveData<Pair<Slide?, Slide?>> = _selectedSlide
 
+    private val _slideOrderChange = MutableLiveData<Pair<Int, Int>>()
+    val slideOrderChange: LiveData<Pair<Int, Int>> = _slideOrderChange
 
     fun selectedSlide(slide: Slide?) {
-
         val prev = selectedSlide.value?.second
         _selectedSlide.value = prev to slide
     }
@@ -40,6 +41,19 @@ class SlideViewModel : ViewModel() {
         val changeAlpha =
             selectedSlide.value!!.second?.let { slideManager.changeSlideAlpha(it.uniqueID, type) }
         _selectedSlide.value = _selectedSlide.value?.first to changeAlpha
+    }
+
+    fun changeSlideOrder(from: Int, to: Int) {
+        val orderChange = slideManager.changeSlideOrder(from, to)
+        _slideOrderChange.value = orderChange
+    }
+
+    fun changeDisplayedSlide(slide: Slide) {
+        val prev = selectedSlide.value?.second
+        if (prev != slide) {
+            _selectedSlide.value = prev to slide
+
+        }
     }
 
 }
