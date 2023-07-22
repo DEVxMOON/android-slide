@@ -4,4 +4,6 @@
     <string name="txt_alpha">투명도</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
+    <string name="layer_add">( + )</string>
+    <string name="slide_type">SlideType</string>
 </resources>
