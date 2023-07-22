@@ -16,3 +16,12 @@ Step 3-2/3 속성 변경 동작 / UDF
 
 [출력 결과]
 ![img_1.png](step3-2,3_result.png)
+
+---
+Step 3-4 슬라이드 목록 표시
+왼쪽에 표시되는 회색 영역에 recycler view를 배치하여 슬라이드를 위한 레이어를 표시한다.
+각각의 슬라이드는 드래그를 통해 순서를 변경할 수 있다.
+recycler view의 아이템을 클릭시 해당 아이템과 연결된 square slide의 속성을 변경할 수 있게 select된다.
+
+[출력 결과]
+![](result3.gif)
