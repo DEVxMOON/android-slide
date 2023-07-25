@@ -4,20 +4,26 @@ import kotlin.random.Random
 
 
 class SlideManager {
-    private val viewMap = mutableMapOf<String, Slide>()
+    private val _slideList = mutableListOf<Slide>()
+    private val slideList: List<Slide> = _slideList
+    private val _slideMap = mutableMapOf<String, Slide>()
+    private val slideMap: Map<String, Slide> = _slideMap
+
 
     //생성.
     fun generateSlide(): Slide {
         val slideFactory = SquareSlideFactory()
         val slide = slideFactory.create(200, RGB(255, 0, 0), Alpha.LV_10)
-        viewMap[slide.uniqueID] = slide
+        _slideList.add(slide)
+        _slideMap[slide.uniqueID] = slide
         return slide
     }
 
     fun changeSlideColor(uniqueID: String): Slide? {
         val changeColor = generateRandomColor()
-        viewMap[uniqueID]?.rgb = changeColor
-        return viewMap[uniqueID]
+        return slideMap[uniqueID]?.apply {
+            rgb = changeColor
+        }
     }
 
     private fun generateRandomColor(): RGB {
@@ -29,7 +35,16 @@ class SlideManager {
     }
 
     fun changeSlideAlpha(uniqueID: String, type: Int): Slide? {
-        viewMap[uniqueID]?.changeAlphaLv(type)
-        return viewMap[uniqueID]
+        slideMap[uniqueID]?.changeAlphaLv(type)
+        return slideMap[uniqueID]
+    }
+
+    fun changeSlideOrder(from: Int, to: Int): Pair<Int, Int> {
+        _slideList.let {
+            val slide = slideList[from]
+            it.removeAt(from)
+            it.add(to, slide)
+        }
+        return from to to
     }
 }

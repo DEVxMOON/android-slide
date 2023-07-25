@@ -1,5 +1,4 @@
 package com.hr.slide_app
-
 enum class Alpha(val level: Int, val value: Float) {
     LV_1(1, 0.1f),
     LV_2(2, 0.2f),
@@ -16,9 +15,8 @@ enum class Alpha(val level: Int, val value: Float) {
         return level.toString()
     }
 
-    companion object
-    {
-        const val ALPHA_UP=1
-        const val ALPHA_DOWN=-1
+    companion object {
+        const val ALPHA_UP = 1
+        const val ALPHA_DOWN = -1
     }
 }
