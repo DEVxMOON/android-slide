@@ -1,5 +1,6 @@
 package com.hr.slide_app
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,9 +23,16 @@ class SlideViewModel : ViewModel() {
         _selectedSlide.value = prev to slide
     }
 
-    fun generateSlide() {
-        val generatedSlide = slideManager.generateSlide()
+    fun generateSquare() {
+        val generatedSlide = slideManager.generateSquare()
         _slides.value = generatedSlide
+        selectedSlide(generatedSlide)
+    }
+
+    fun generateImage() {
+        val generatedSlide = slideManager.generateImage()
+        _slides.value = generatedSlide
+        selectedSlide(generatedSlide)
     }
 
     fun changeSlideColor() {
@@ -56,4 +64,11 @@ class SlideViewModel : ViewModel() {
         }
     }
 
+    fun changeImage(imageUri: Uri, width:Int, height:Int) {
+        val newImage =
+            _selectedSlide.value?.second?.let { slideManager.changeImage(it.uniqueID,imageUri,width,height) }
+        if (newImage != null) {
+            _selectedSlide.value = _selectedSlide.value?.first to newImage
+        }
+    }
 }
