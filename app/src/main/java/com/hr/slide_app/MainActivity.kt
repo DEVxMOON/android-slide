@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.hr.slide_app.databinding.ActivityMainBinding
 import java.util.Random
 
+
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: SlideViewModel by viewModels()
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
