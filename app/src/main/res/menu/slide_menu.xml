@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/send_to_back"
+        android:title="@string/send_to_back" />
+
+    <item
+        android:id="@+id/send_backward"
+        android:title="@string/send_backward" />
+
+    <item
+        android:id="@+id/bring_forward"
+        android:title="@string/bring_forward" />
+
+    <item
+        android:id="@+id/bring_to_front"
+        android:title="@string/bring_to_front" />
+</menu>
