@@ -6,4 +6,8 @@
     <string name="plus">+</string>
     <string name="layer_add">( + )</string>
     <string name="slide_type">SlideType</string>
+    <string name="send_to_back">맨 뒤로 보내기</string>
+    <string name="send_backward">뒤로 보내기</string>
+    <string name="bring_forward">앞으로 보내기</string>
+    <string name="bring_to_front">맨 앞으로 보내기</string>
 </resources>
