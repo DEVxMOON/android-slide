@@ -5,7 +5,7 @@ import kotlin.random.Random
 abstract class SlideFactory {
     private val uniqueIdList = mutableSetOf<String>()
 
-    abstract fun create(side: Int, rgb: RGB, alpha: Alpha): Slide
+    abstract fun create(width: Int, height: Int, rgb: RGB, alpha: Alpha): Slide
 
     fun generateRandomId(): String {
 

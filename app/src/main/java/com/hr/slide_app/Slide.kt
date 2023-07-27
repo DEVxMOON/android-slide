@@ -2,10 +2,11 @@ package com.hr.slide_app
 
 open class Slide(
     val uniqueID: String,
-    val width: Int,
-    val height: Int,
+    var width: Int,
+    var height: Int,
     var rgb: RGB,
-    var alpha: Alpha
+    var alpha: Alpha,
+    val type : Int
 ) {
     override fun toString(): String {
         return "('$uniqueID'), Width:$width, Height:$height, $rgb, Alpha: $alpha"
